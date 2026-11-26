@@ -4,96 +4,117 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>People — Nusantara Numbers</title>
-<meta name="description" content="Indonesia's people in figures: population growth 2010–2024, unemployment, poverty and life expectancy, each sourced and dated.">
+<meta name="description" content="Indonesia's people in figures: population trend 2010–2024, unemployment, poverty rate and life expectancy, with every figure sourced and dated.">
+<link rel="icon" type="image/svg+xml" href="img/logo.svg">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="img/logo.svg" type="image/svg+xml">
 </head>
 <body data-page="people">
 <header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="index.html" data-page="index">Overview</a>
-      <a href="economy.html" data-page="economy">Economy</a>
-      <a href="people.html" data-page="people">People</a>
-      <a href="provinces.html" data-page="provinces">Provinces</a>
-      <a href="sources.html" data-page="sources">Sources</a>
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="Nusantara Numbers logo — a garuda wing monogram" width="44" height="44">
+      <span>
+        <span class="brand-name">Nusantara Numbers</span><br>
+        <span class="brand-tag">Indonesia in figures, sourced and dated.</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a data-nav="index" href="index.html">Overview</a>
+      <a data-nav="economy" href="economy.html">Economy</a>
+      <a data-nav="people" href="people.html">People</a>
+      <a data-nav="provinces" href="provinces.html">Provinces</a>
+      <a data-nav="sources" href="sources.html">Sources &amp; Method</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <h1>People</h1>
-  <p class="lede">Indonesia is home to 283.5 million people. The population grew by
-  39 million between 2010 and 2024, from 244.5 million to 283.5 million.</p>
-
-  <section class="kpi-grid" aria-label="Key population indicators">
-    <article class="kpi-card">
-      <div class="kpi-value">283.5M</div>
-      <div class="kpi-label">Population</div>
-      <p class="kpi-note">283.5 million people</p>
-      <p class="source-line">Source: <strong>World Bank</strong>, 2024</p>
-    </article>
-    <article class="kpi-card">
-      <div class="kpi-value">4.76%</div>
-      <div class="kpi-label">Unemployment</div>
-      <p class="kpi-note">Open unemployment rate</p>
-      <p class="source-line">Source: <strong>BPS</strong>, Feb 2025</p>
-    </article>
-    <article class="kpi-card">
-      <div class="kpi-value">8.47%</div>
-      <div class="kpi-label">Poverty rate</div>
-      <p class="kpi-note">Share below the poverty line</p>
-      <p class="source-line">Source: <strong>BPS</strong>, Mar 2025</p>
-    </article>
-    <article class="kpi-card">
-      <div class="kpi-value">74.2</div>
-      <div class="kpi-label">Life expectancy</div>
-      <p class="kpi-note">74.2 years at birth</p>
-      <p class="source-line">Source: <strong>BPS</strong>, 2024</p>
-    </article>
-  </section>
-
-  <section class="card chart-card">
-    <h2>Population, 2010&ndash;2024</h2>
-    <canvas id="population-chart" role="img" aria-label="Line chart of Indonesia's population: 2010 244.5 million, 2015 264.0 million, 2020 274.0 million, 2024 283.5 million"></canvas>
-    <p class="chart-note">Total population, millions. Source: <strong>World Bank</strong>,
-    2010&ndash;2024. The population grew by 39 million over these fourteen years.</p>
-  </section>
-
-  <section>
-    <h2>Ten most populous provinces</h2>
-    <div class="table-tools">
-      <label for="top10-search">Search provinces</label>
-      <input type="search" id="top10-search" class="table-search" data-table="top10-table" data-count-for="top10-count" placeholder="Type a province, capital or region…">
-      <span class="row-count" id="top10-count"></span>
+  <section aria-labelledby="page-heading">
+    <h1 id="page-heading">People</h1>
+    <p class="section-note">How many Indonesians there are, how the population has grown, and how life is changing — unemployment, poverty and life expectancy.</p>
+    <div class="kpi-grid">
+      <article class="card">
+        <div class="kpi-label">Population</div>
+        <div class="kpi-value">283.5 <span class="unit">million</span></div>
+        <div class="kpi-sub">Up 9.5 million since 2020</div>
+        <div class="kpi-source">Source: World Bank, 2024</div>
+      </article>
+      <article class="card">
+        <div class="kpi-label">Unemployment</div>
+        <div class="kpi-value">4.76%</div>
+        <div class="kpi-sub">Labour force, February survey</div>
+        <div class="kpi-source">Source: BPS, Feb 2025</div>
+      </article>
+      <article class="card">
+        <div class="kpi-label">Poverty rate</div>
+        <div class="kpi-value">8.47%</div>
+        <div class="kpi-sub">Share of population below the poverty line, March</div>
+        <div class="kpi-source">Source: BPS, Mar 2025</div>
+      </article>
+      <article class="card">
+        <div class="kpi-label">Life expectancy</div>
+        <div class="kpi-value">74.2 <span class="unit">years</span></div>
+        <div class="kpi-sub">At birth</div>
+        <div class="kpi-source">Source: BPS, 2024</div>
+      </article>
     </div>
-    <p>Click a column heading to sort the table.</p>
-    <div class="table-wrap">
-      <table class="data sortable" id="top10-table">
+  </section>
+
+  <section aria-labelledby="pop-heading">
+    <div class="card chart-card">
+      <h2 id="pop-heading">Population trend, 2010–2024</h2>
+      <p class="chart-source">Source: World Bank, 2010–2024. Indonesia added about 39 million people between 2010 and 2024.</p>
+      <canvas id="population-chart" class="chart" role="img" aria-label="Line chart of population: 244.5 million in 2010, 264.0 million in 2015, 274.0 million in 2020, 283.5 million in 2024"></canvas>
+    </div>
+  </section>
+
+  <section aria-labelledby="table-heading">
+    <h2 id="table-heading">Largest provinces by population</h2>
+    <p class="section-note">The 10 most populous provinces. Click a column heading to sort, or type to search. Population in millions, BPS 2024; share is of the 283.5M national total (World Bank, 2024).</p>
+    <div class="table-tools">
+      <label for="top10-search">Search provinces:</label>
+      <input class="search-box" type="search" id="top10-search" data-search-for="top10-table" placeholder="e.g. Java, Medan, Sumatra">
+    </div>
+    <div class="table-scroll">
+      <table class="data" data-sortable id="top10-table">
+        <caption>Top 10 provinces by population, 2024</caption>
         <thead>
-          <tr><th>#</th><th>Province</th><th>Capital</th><th>Region</th><th class="num">Population (M)</th><th class="num">Share</th></tr>
+          <tr>
+            <th data-type="number"><button type="button" data-label="#">#</button></th>
+            <th data-type="text"><button type="button" data-label="Province">Province</button></th>
+            <th data-type="text"><button type="button" data-label="Capital">Capital</button></th>
+            <th data-type="text"><button type="button" data-label="Region">Region</button></th>
+            <th data-type="number" class="num"><button type="button" data-label="Population (M)">Population (M)</button></th>
+            <th data-type="number" class="num"><button type="button" data-label="Share">Share</button></th>
+          </tr>
         </thead>
-        <tbody id="top10-body"></tbody>
+        <tbody>
+          <tr><td>1</td><td>West Java</td><td>Bandung</td><td>Java</td><td class="num">49.3</td><td class="num">17.39%</td></tr>
+          <tr><td>2</td><td>East Java</td><td>Surabaya</td><td>Java</td><td class="num">41.8</td><td class="num">14.74%</td></tr>
+          <tr><td>3</td><td>Central Java</td><td>Semarang</td><td>Java</td><td class="num">37.9</td><td class="num">13.37%</td></tr>
+          <tr><td>4</td><td>North Sumatra</td><td>Medan</td><td>Sumatra</td><td class="num">15.6</td><td class="num">5.50%</td></tr>
+          <tr><td>5</td><td>Banten</td><td>Serang</td><td>Java</td><td class="num">12.4</td><td class="num">4.37%</td></tr>
+          <tr><td>6</td><td>Jakarta</td><td>Jakarta</td><td>Java</td><td class="num">10.6</td><td class="num">3.74%</td></tr>
+          <tr><td>7</td><td>South Sulawesi</td><td>Makassar</td><td>Sulawesi</td><td class="num">9.4</td><td class="num">3.32%</td></tr>
+          <tr><td>8</td><td>Lampung</td><td>Bandar Lampung</td><td>Sumatra</td><td class="num">9.2</td><td class="num">3.25%</td></tr>
+          <tr><td>9</td><td>South Sumatra</td><td>Palembang</td><td>Sumatra</td><td class="num">8.8</td><td class="num">3.10%</td></tr>
+          <tr><td>10</td><td>Riau</td><td>Pekanbaru</td><td>Sumatra</td><td class="num">6.9</td><td class="num">2.43%</td></tr>
+        </tbody>
       </table>
     </div>
-    <p class="table-note">Population in millions. Share is the province&rsquo;s share of the
-    national total of 283.5 million. Source: <strong>BPS</strong>, 2024.
-    See the full ranking on the <a href="provinces.html">Provinces</a> page.</p>
+    <p class="no-results" id="top10-table-empty" hidden>No provinces match your search.</p>
+    <p class="table-note">Full table: see <a href="provinces.html">Provinces</a> for all 18 most populous provinces.</p>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
-    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
-    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+    <p><strong>Nusantara Numbers</strong> — Indonesia in figures, sourced and dated.
+    Figures: World Bank (2024) and BPS — Statistics Indonesia (2020–2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and year.</p>
   </div>
 </footer>
 
-<script src="js/data.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/tables.js"></script>
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

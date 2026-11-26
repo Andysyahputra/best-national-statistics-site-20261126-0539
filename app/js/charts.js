@@ -1,164 +1,197 @@
-// Nusantara Numbers — hand-drawn canvas charts. No chart library.
-// Every chart is drawn with plain Canvas 2D calls, scaled for the
-// device pixel ratio so lines stay crisp on desktop and phone screens.
-window.NNCharts = (function () {
-  var TEAL = "#006D6F";
-  var SEAFOAM = "#4EC9B0";
-  var CORAL = "#E85D4A";
-  var CHARCOAL = "#1A1A2E";
-  var GRID = "#D8CDB8";
-  var MUTED = "#6B6355";
+// Nusantara Numbers — hand-drawn canvas charts. Zero dependencies: every
+// bar, line and label is drawn with the Canvas 2D API. Colours match the site
+// palette (teal #006D6F, coral #E85D4A for down/bad, seafoam #4EC9B0 for up/good).
 
-  function setup(canvas, heightCss) {
-    var dpr = window.devicePixelRatio || 1;
-    var width = canvas.clientWidth || canvas.parentElement.clientWidth || 600;
-    var height = heightCss || 260;
-    canvas.style.height = height + "px";
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
-    var ctx = canvas.getContext("2d");
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, width, height);
-    ctx.font = "12px -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
-    return { ctx: ctx, width: width, height: height };
-  }
+const TEAL = "#006d6f";
+const CORAL = "#e85d4a";
+const SEAFOAM = "#4ec9b0";
+const INK = "#1a1a2e";
+const MUTED = "#5a5a6e";
+const GRID = "#e3d5be";
 
-  function niceMax(values) {
-    var max = Math.max.apply(null, values.map(Math.abs));
-    if (max <= 0) return 1;
-    var step = Math.pow(10, Math.floor(Math.log10(max)));
-    var scaled = max / step;
-    var nice = scaled <= 1 ? 1 : scaled <= 2 ? 2 : scaled <= 2.5 ? 2.5 : scaled <= 5 ? 5 : 10;
-    return nice * step;
-  }
+// Size the canvas to its CSS box (times devicePixelRatio for crisp lines)
+// and return a 2d context already scaled to CSS pixels.
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const width = Math.max(50, Math.round(rect.width));
+  const height = Math.max(50, Math.round(rect.height));
+  canvas.width = Math.round(width * dpr);
+  canvas.height = Math.round(height * dpr);
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+  return { ctx, width, height };
+}
 
-  // Vertical bars. Values may be negative (2020 growth was -2.07%).
-  // opts: { unit, decimals, zeroLabel }
-  function barChart(canvas, labels, values, opts) {
-    opts = opts || {};
-    var g = setup(canvas, opts.height || 260);
-    var ctx = g.ctx, W = g.width, H = g.height;
-    var padL = 44, padR = 10, padT = 24, padB = 28;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
-    var max = niceMax(values);
-    var min = Math.min(0, Math.min.apply(null, values));
-    var range = max - min;
-    var zeroY = padT + (max / range) * plotH;
-    var decimals = opts.decimals == null ? 2 : opts.decimals;
-    var unit = opts.unit || "%";
+function niceMax(values) {
+  const max = Math.max(0, ...values);
+  if (max <= 0) return 1;
+  const step = Math.pow(10, Math.floor(Math.log10(max)));
+  return Math.ceil(max / step) * step;
+}
 
-    // gridlines + y labels
-    ctx.strokeStyle = GRID; ctx.fillStyle = MUTED; ctx.lineWidth = 1;
-    ctx.textAlign = "right"; ctx.textBaseline = "middle";
-    var ticks = 4;
-    for (var i = 0; i <= ticks; i++) {
-      var v = min + (range * i) / ticks;
-      var y = padT + plotH - ((v - min) / range) * plotH;
-      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
-      ctx.fillText(v.toFixed(0) + unit, padL - 6, y);
-    }
-    // zero line
-    ctx.strokeStyle = CHARCOAL;
-    ctx.beginPath(); ctx.moveTo(padL, zeroY); ctx.lineTo(W - padR, zeroY); ctx.stroke();
+// Round step up to a "nice" number (1, 2, 2.5, 5 or 10 times a power of ten),
+// so axis labels read 0, 2, 4, 6 — never 3.98 or 1.97.
+function niceStep(raw) {
+  const power = Math.pow(10, Math.floor(Math.log10(raw)));
+  const n = raw / power;
+  const m = n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10;
+  return m * power;
+}
 
-    var slot = plotW / values.length;
-    var barW = Math.min(56, slot * 0.62);
-    for (var j = 0; j < values.length; j++) {
-      var val = values[j];
-      var x = padL + slot * j + (slot - barW) / 2;
-      var yTop, h;
-      if (val >= 0) { yTop = zeroY - (val / range) * plotH; h = (val / range) * plotH; }
-      else { yTop = zeroY; h = (-val / range) * plotH; }
-      ctx.fillStyle = val >= 0 ? TEAL : CORAL;
-      ctx.fillRect(x, yTop, barW, Math.max(h, 1));
-      var label = (val == null ? "—" : val.toFixed(decimals) + unit);
-      // Value label: above a positive bar; inside a negative bar (white),
-      // so it can never fall off the bottom of the canvas.
-      if (val >= 0) {
-        ctx.fillStyle = CHARCOAL; ctx.textAlign = "center"; ctx.textBaseline = "bottom";
-        ctx.fillText(label, x + barW / 2, yTop - 4);
-      } else {
-        ctx.fillStyle = "#FFFFFF"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        ctx.fillText(label, x + barW / 2, yTop + h / 2);
-      }
-      // x label
-      ctx.fillStyle = MUTED; ctx.textBaseline = "top";
-      ctx.fillText(String(labels[j]), x + barW / 2, H - padB + 8);
-    }
-  }
+// Round axis bounds [lo, hi] out to whole steps; returns { lo, hi, step }.
+function niceAxis(lo, hi) {
+  const step = niceStep((hi - lo) / 4 || 1);
+  return {
+    lo: Math.floor(lo / step) * step,
+    hi: Math.ceil(hi / step) * step,
+    step,
+  };
+}
 
-  // Line chart with dots and value labels.
-  // opts: { unit, decimals }
-  function lineChart(canvas, labels, values, opts) {
-    opts = opts || {};
-    var g = setup(canvas, opts.height || 260);
-    var ctx = g.ctx, W = g.width, H = g.height;
-    var padL = 44, padR = 16, padT = 24, padB = 28;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
-    var min = Math.min.apply(null, values);
-    var max = Math.max.apply(null, values);
-    var pad = (max - min) * 0.15 || 1;
-    min -= pad; max += pad;
-    var range = max - min;
-    var decimals = opts.decimals == null ? 2 : opts.decimals;
-    var unit = opts.unit || "%";
+// Vertical bar chart. `values` may include negatives (a zero line is drawn).
+// opts: { labels, values, format(v) -> string, colorFor(v, i) -> colour, unit }
+export function drawBarChart(canvas, opts) {
+  const { ctx, width, height } = setupCanvas(canvas);
+  const pad = { left: 46, right: 12, top: 26, bottom: 30 };
+  const plotW = width - pad.left - pad.right;
+  const plotH = height - pad.top - pad.bottom;
+  const axis = niceAxis(Math.min(0, ...opts.values), niceMax(opts.values));
+  const lo = axis.lo;
+  const hi = axis.hi;
+  const span = hi - lo;
+  const y = (v) => pad.top + ((hi - v) / span) * plotH;
+  const zeroY = y(0);
 
-    ctx.strokeStyle = GRID; ctx.fillStyle = MUTED; ctx.lineWidth = 1;
-    ctx.textAlign = "right"; ctx.textBaseline = "middle";
-    for (var i = 0; i <= 4; i++) {
-      var v = min + (range * i) / 4;
-      var y = padT + plotH - ((v - min) / range) * plotH;
-      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
-      ctx.fillText(v.toFixed(decimals) + unit, padL - 6, y);
-    }
-
-    function px(j) { return padL + (plotW * j) / (values.length - 1); }
-    function py(v) { return padT + plotH - ((v - min) / range) * plotH; }
-
-    ctx.strokeStyle = TEAL; ctx.lineWidth = 2.5; ctx.lineJoin = "round";
+  ctx.font = "12px -apple-system, 'Segoe UI', Roboto, Arial, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  // Gridlines + y-axis labels at round steps.
+  for (let v = lo; v <= hi + 1e-9; v += axis.step) {
+    const yy = y(v);
+    ctx.strokeStyle = GRID;
     ctx.beginPath();
-    for (var j = 0; j < values.length; j++) {
-      if (j === 0) ctx.moveTo(px(j), py(values[j]));
-      else ctx.lineTo(px(j), py(values[j]));
-    }
+    ctx.moveTo(pad.left, yy);
+    ctx.lineTo(width - pad.right, yy);
     ctx.stroke();
+    ctx.fillStyle = MUTED;
+    ctx.fillText(opts.format(v), pad.left - 8, yy);
+  }
+  // Zero line.
+  ctx.strokeStyle = INK;
+  ctx.beginPath();
+  ctx.moveTo(pad.left, zeroY);
+  ctx.lineTo(width - pad.right, zeroY);
+  ctx.stroke();
 
-    for (var k = 0; k < values.length; k++) {
-      ctx.fillStyle = "#FFFFFF";
-      ctx.beginPath(); ctx.arc(px(k), py(values[k]), 5, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = TEAL; ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.arc(px(k), py(values[k]), 5, 0, Math.PI * 2); ctx.stroke();
-      ctx.fillStyle = CHARCOAL; ctx.textAlign = "center"; ctx.textBaseline = "bottom";
-      ctx.fillText(values[k].toFixed(decimals) + unit, px(k), py(values[k]) - 9);
-      ctx.fillStyle = MUTED; ctx.textBaseline = "top";
-      ctx.fillText(String(labels[k]), px(k), H - padB + 8);
-    }
+  const n = opts.values.length;
+  const slot = plotW / n;
+  const barW = Math.min(64, slot * 0.58);
+  opts.values.forEach((v, i) => {
+    const x = pad.left + slot * i + (slot - barW) / 2;
+    const top = y(Math.max(v, 0));
+    const bottom = y(Math.min(v, 0));
+    ctx.fillStyle = opts.colorFor ? opts.colorFor(v, i) : TEAL;
+    ctx.fillRect(x, top, barW, Math.max(2, bottom - top));
+    ctx.fillStyle = INK;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(opts.format(v, i), x + barW / 2, top - 5);
+    ctx.fillStyle = MUTED;
+    ctx.textBaseline = "top";
+    ctx.fillText(String(opts.labels[i]), x + barW / 2, height - pad.bottom + 8);
+  });
+}
+
+// Line chart with dots and value labels. opts: { labels, values, format(v), unit }
+export function drawLineChart(canvas, opts) {
+  const { ctx, width, height } = setupCanvas(canvas);
+  const pad = { left: 52, right: 18, top: 26, bottom: 30 };
+  const plotW = width - pad.left - pad.right;
+  const plotH = height - pad.top - pad.bottom;
+  const lo = Math.min(...opts.values);
+  const hi = Math.max(...opts.values);
+  const axis = niceAxis(
+    lo - (hi - lo) * 0.25,
+    hi + (hi - lo) * 0.25,
+  );
+  const span = axis.hi - axis.lo;
+  const x = (i) => pad.left + (plotW * i) / (opts.values.length - 1);
+  const y = (v) => pad.top + ((axis.hi - v) / span) * plotH;
+
+  ctx.font = "12px -apple-system, 'Segoe UI', Roboto, Arial, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let v = axis.lo; v <= axis.hi + 1e-9; v += axis.step) {
+    const yy = y(v);
+    ctx.strokeStyle = GRID;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, yy);
+    ctx.lineTo(width - pad.right, yy);
+    ctx.stroke();
+    ctx.fillStyle = MUTED;
+    ctx.fillText(opts.format(v), pad.left - 8, yy);
   }
 
-  // Horizontal bars, longest first. opts: { unit, decimals, color }
-  function hbarChart(canvas, labels, values, opts) {
-    opts = opts || {};
-    var rowH = 34;
-    var height = Math.max(120, values.length * rowH + 30);
-    var g = setup(canvas, height);
-    var ctx = g.ctx, W = g.width, H = g.height;
-    var padL = 150, padR = 56, padT = 8, padB = 8;
-    var plotW = W - padL - padR;
-    var max = niceMax(values);
-    var decimals = opts.decimals == null ? 0 : opts.decimals;
-    var unit = opts.unit || "%";
-    ctx.font = "12px -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
-    for (var j = 0; j < values.length; j++) {
-      var y = padT + j * rowH + 6;
-      var w = (values[j] / max) * plotW;
-      ctx.fillStyle = CHARCOAL; ctx.textAlign = "right"; ctx.textBaseline = "middle";
-      ctx.fillText(String(labels[j]), padL - 8, y + 9);
-      ctx.fillStyle = j === 0 ? TEAL : SEAFOAM;
-      ctx.fillRect(padL, y, Math.max(w, 1), 18);
-      ctx.fillStyle = CHARCOAL; ctx.textAlign = "left";
-      ctx.fillText(values[j].toFixed(decimals) + unit, padL + w + 6, y + 9);
-    }
-  }
+  // Line.
+  ctx.strokeStyle = TEAL;
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = "round";
+  ctx.beginPath();
+  opts.values.forEach((v, i) => {
+    if (i === 0) ctx.moveTo(x(i), y(v));
+    else ctx.lineTo(x(i), y(v));
+  });
+  ctx.stroke();
+  ctx.lineWidth = 1;
 
-  return { barChart: barChart, lineChart: lineChart, hbarChart: hbarChart };
-})();
+  // Dots + value labels.
+  opts.values.forEach((v, i) => {
+    ctx.fillStyle = TEAL;
+    ctx.beginPath();
+    ctx.arc(x(i), y(v), 4.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#fff";
+    ctx.beginPath();
+    ctx.arc(x(i), y(v), 2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = INK;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(opts.format(v), x(i), y(v) - 9);
+    ctx.fillStyle = MUTED;
+    ctx.textBaseline = "top";
+    ctx.fillText(String(opts.labels[i]), x(i), height - pad.bottom + 8);
+  });
+}
+
+// Horizontal bar chart. opts: { labels, values, format(v) -> string, maxValue }
+export function drawHBarChart(canvas, opts) {
+  const { ctx, width, height } = setupCanvas(canvas);
+  const pad = { left: 8, right: 58, top: 8, bottom: 8 };
+  const n = opts.values.length;
+  const rowH = (height - pad.top - pad.bottom) / n;
+  const barH = Math.min(26, rowH * 0.52);
+  const max = opts.maxValue || niceMax(opts.values);
+
+  ctx.font = "13px -apple-system, 'Segoe UI', Roboto, Arial, sans-serif";
+  opts.values.forEach((v, i) => {
+    const cy = pad.top + rowH * i + rowH / 2;
+    const label = String(opts.labels[i]);
+    const valueText = opts.format(v);
+    // Label above the bar, value at the bar's end.
+    ctx.fillStyle = INK;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(label, pad.left, cy - barH / 2 - 3);
+    const barX = pad.left;
+    const barW = ((width - pad.left - pad.right) * v) / max;
+    ctx.fillStyle = i === 0 ? TEAL : SEAFOAM;
+    ctx.fillRect(barX, cy - barH / 2, Math.max(2, barW), barH);
+    ctx.fillStyle = INK;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText(valueText, barX + Math.max(2, barW) + 8, cy);
+  });
+}

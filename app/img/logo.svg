@@ -1,16 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Nusantara Numbers garuda-wing monogram">
-  <!-- Hand-drawn garuda-wing monogram: three sweeping wing feathers
-       rising from a shared base, in deep teal on a sand disc. -->
-  <circle cx="32" cy="32" r="30" fill="#F5E6D3" stroke="#006D6F" stroke-width="2.5"/>
-  <g fill="none" stroke="#006D6F" stroke-width="4" stroke-linecap="round">
-    <path d="M18 44 C 20 30, 26 20, 36 14"/>
-    <path d="M26 46 C 28 34, 34 26, 44 20"/>
-    <path d="M34 47 C 36 38, 42 32, 50 28"/>
-  </g>
-  <g fill="#4EC9B0">
-    <circle cx="36" cy="14" r="2.6"/>
-    <circle cx="44" cy="20" r="2.6"/>
-    <circle cx="50" cy="28" r="2.6"/>
-  </g>
-  <path d="M14 48 Q 32 54 50 48" fill="none" stroke="#E85D4A" stroke-width="3" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Nusantara Numbers garuda-wing monogram">
+  <rect x="2" y="2" width="92" height="92" rx="18" fill="#006d6f"/>
+  <!-- Stylised garuda wing: three sweeping feather arcs rising to the right -->
+  <path d="M18 66 C30 52, 44 44, 62 40 C52 50, 44 56, 36 60 C46 58, 58 54, 70 46 C60 58, 48 64, 34 66 Z" fill="#f5e6d3"/>
+  <path d="M20 74 C34 62, 50 56, 68 52 C58 62, 46 68, 32 72 C44 70, 58 66, 72 58 C62 70, 48 76, 32 78 Z" fill="#4ec9b0"/>
+  <path d="M22 82 C36 72, 52 66, 70 62 C60 72, 48 78, 34 80 C46 79, 60 75, 74 68 C64 79, 50 84, 34 86 Z" fill="#c9a227"/>
+  <!-- Rising sun dot above the wing -->
+  <circle cx="70" cy="26" r="7" fill="#f5e6d3"/>
 </svg>

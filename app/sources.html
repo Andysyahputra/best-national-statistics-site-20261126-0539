@@ -4,68 +4,126 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sources &amp; Method — Nusantara Numbers</title>
-<meta name="description" content="Every figure on Nusantara Numbers with its source, year and a short note, plus the site's own data files to download.">
+<meta name="description" content="Every figure on Nusantara Numbers with its source, year and note, plus the site's data files to download.">
+<link rel="icon" type="image/svg+xml" href="img/logo.svg">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="img/logo.svg" type="image/svg+xml">
 </head>
 <body data-page="sources">
 <header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="index.html" data-page="index">Overview</a>
-      <a href="economy.html" data-page="economy">Economy</a>
-      <a href="people.html" data-page="people">People</a>
-      <a href="provinces.html" data-page="provinces">Provinces</a>
-      <a href="sources.html" data-page="sources">Sources</a>
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="Nusantara Numbers logo — a garuda wing monogram" width="44" height="44">
+      <span>
+        <span class="brand-name">Nusantara Numbers</span><br>
+        <span class="brand-tag">Indonesia in figures, sourced and dated.</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a data-nav="index" href="index.html">Overview</a>
+      <a data-nav="economy" href="economy.html">Economy</a>
+      <a data-nav="people" href="people.html">People</a>
+      <a data-nav="provinces" href="provinces.html">Provinces</a>
+      <a data-nav="sources" href="sources.html">Sources &amp; Method</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <h1>Sources &amp; Method</h1>
-  <p class="lede">Every figure on this site comes from one of two publishers:
-  the <strong>World Bank</strong> (World Development Indicators) for population
-  and GDP, and <strong>BPS &mdash; Statistics Indonesia</strong> for growth,
-  inflation, jobs, poverty, life expectancy, sectors and provinces. Each entry
-  below names the figure, its source, its year and a short note. Province shares
-  are the site&rsquo;s own arithmetic: province population divided by the national
-  total of 283.5 million. Sector shares are labelled &ldquo;approx.&rdquo; because
-  BPS publishes them rounded.</p>
+  <section aria-labelledby="page-heading">
+    <h1 id="page-heading">Sources &amp; Method</h1>
+    <p class="section-note">This site uses exactly two sources. Every figure on every page comes from one of them, and each is labelled with its source and year where it appears. No other numbers are used anywhere on the site.</p>
+  </section>
 
-  <h2>Download the data</h2>
-  <p>The same figures the site shows, as files you can keep:</p>
-  <div class="downloads">
-    <a href="data/all.json" download>Download all figures (JSON)</a>
-    <a href="data/provinces.csv" download>Download provinces (CSV)</a>
-  </div>
+  <section aria-labelledby="download-heading">
+    <h2 id="download-heading">Download the data</h2>
+    <p class="section-note">The same figures as files, free to reuse with attribution to the source named in each file.</p>
+    <div class="download-box">
+      <a class="download-link" href="data/all.json" download>Download all figures (JSON)</a>
+      <a class="download-link" href="data/provinces.csv" download>Download provinces table (CSV)</a>
+    </div>
+  </section>
 
-  <h2>Every figure, with its source</h2>
-  <ul class="sources-list" id="sources-list"></ul>
+  <section aria-labelledby="figures-heading">
+    <h2 id="figures-heading">Every figure on this site</h2>
+    <ul class="source-list">
+      <li>
+        <div class="src-figure">Population — 283.5 million</div>
+        <div class="src-meta">World Bank, 2024</div>
+        <div class="src-note">National total; also the base for every province share on this site.</div>
+      </li>
+      <li>
+        <div class="src-figure">GDP — $1.40 trillion</div>
+        <div class="src-meta">World Bank, 2024</div>
+        <div class="src-note">Nominal GDP in current US dollars.</div>
+      </li>
+      <li>
+        <div class="src-figure">GDP per capita — $4,925</div>
+        <div class="src-meta">World Bank, 2024</div>
+        <div class="src-note">Per person, per year, in current US dollars.</div>
+      </li>
+      <li>
+        <div class="src-figure">GDP growth — 5.03%</div>
+        <div class="src-meta">BPS, 2024</div>
+        <div class="src-note">Annual real GDP growth. History: 2020 −2.07%, 2021 3.70%, 2022 5.31%, 2023 5.05%, 2024 5.03% (BPS).</div>
+      </li>
+      <li>
+        <div class="src-figure">Inflation — 1.57%</div>
+        <div class="src-meta">BPS, Dec 2024</div>
+        <div class="src-note">Consumer Price Index, year-on-year, December. History: 2020 1.68%, 2021 1.87%, 2022 5.51%, 2023 2.61%, 2024 1.57% (BPS, December YoY).</div>
+      </li>
+      <li>
+        <div class="src-figure">Unemployment — 4.76%</div>
+        <div class="src-meta">BPS, Feb 2025</div>
+        <div class="src-note">Share of the labour force, February survey.</div>
+      </li>
+      <li>
+        <div class="src-figure">Poverty rate — 8.47%</div>
+        <div class="src-meta">BPS, Mar 2025</div>
+        <div class="src-note">Share of the population below the poverty line, March.</div>
+      </li>
+      <li>
+        <div class="src-figure">Life expectancy — 74.2 years</div>
+        <div class="src-meta">BPS, 2024</div>
+        <div class="src-note">Life expectancy at birth.</div>
+      </li>
+      <li>
+        <div class="src-figure">Population history — 244.5M (2010), 264.0M (2015), 274.0M (2020), 283.5M (2024)</div>
+        <div class="src-meta">World Bank, 2010–2024</div>
+        <div class="src-note">National population at each census and estimate year shown on the People page.</div>
+      </li>
+      <li>
+        <div class="src-figure">GDP by sector (approx.) — Manufacturing ~19%, Wholesale &amp; retail trade ~13%, Agriculture ~12%, Construction ~10%, Mining ~8%, Other ~38%</div>
+        <div class="src-meta">BPS, 2024</div>
+        <div class="src-note">Approximate shares of GDP, labelled “approx.” wherever they appear.</div>
+      </li>
+      <li>
+        <div class="src-figure">Provinces — 18 most populous, 2.7M to 49.3M people</div>
+        <div class="src-meta">BPS, 2024</div>
+        <div class="src-note">West Java 49.3M down to North Sulawesi 2.7M, with capitals and island-group regions. Shares are computed from the 283.5M national total (World Bank, 2024). 18 most populous of 38 provinces; the rest total ~19.5M.</div>
+      </li>
+    </ul>
+  </section>
 
-  <h2>Method notes</h2>
-  <ul>
-    <li>Population, GDP and GDP per capita are World Bank figures for 2024.</li>
-    <li>GDP growth is real (inflation-adjusted) growth, year on year, from BPS.</li>
-    <li>Inflation is the Consumer Price Index, year on year, measured each December, from BPS.</li>
-    <li>Unemployment is the open unemployment rate for February 2025, from BPS.</li>
-    <li>Poverty is the share of the population below the poverty line, March 2025, from BPS.</li>
-    <li>The province table lists the 18 most populous of Indonesia&rsquo;s 38 provinces; the remaining 20 provinces total about 19.5 million people.</li>
-    <li>Nothing on this site is estimated by the site itself, except the province shares, which are simple divisions of the published figures.</li>
-  </ul>
+  <section aria-labelledby="method-heading">
+    <h2 id="method-heading">Method</h2>
+    <div class="about-note">
+      <p><strong>Shares.</strong> Each province's share is its population divided by the 283.5 million national total, shown to two decimal places.</p>
+      <p><strong>Change in percentage points.</strong> The growth chart's “Change (pp)” view subtracts the previous year's growth rate from the current year's; 2020 has no previous year shown, so it reads “n/a”.</p>
+      <p><strong>Rounding.</strong> Figures are shown exactly as published; sector shares are approximate and labelled as such.</p>
+      <p><strong>Currency.</strong> Dollar figures are in current US dollars as published by the World Bank.</p>
+      <p><strong>Freshness.</strong> Data as of November 2026. When BPS or the World Bank publish new figures, this page is where the update will be noted first.</p>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
-    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
-    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+    <p><strong>Nusantara Numbers</strong> — Indonesia in figures, sourced and dated.
+    Figures: World Bank (2024) and BPS — Statistics Indonesia (2020–2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and year.</p>
   </div>
 </footer>
 
-<script src="js/data.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/tables.js"></script>
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

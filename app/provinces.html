@@ -4,78 +4,99 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Provinces — Nusantara Numbers</title>
-<meta name="description" content="Indonesia's 18 most populous provinces in figures: population, capital, region and share of the national total, sortable and searchable.">
+<meta name="description" content="Indonesia's 18 most populous provinces, ranked by population with capitals and regions. Sortable and searchable. Every figure sourced and dated.">
+<link rel="icon" type="image/svg+xml" href="img/logo.svg">
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="img/logo.svg" type="image/svg+xml">
 </head>
 <body data-page="provinces">
 <header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="index.html" data-page="index">Overview</a>
-      <a href="economy.html" data-page="economy">Economy</a>
-      <a href="people.html" data-page="people">People</a>
-      <a href="provinces.html" data-page="provinces">Provinces</a>
-      <a href="sources.html" data-page="sources">Sources</a>
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="Nusantara Numbers logo — a garuda wing monogram" width="44" height="44">
+      <span>
+        <span class="brand-name">Nusantara Numbers</span><br>
+        <span class="brand-tag">Indonesia in figures, sourced and dated.</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a data-nav="index" href="index.html">Overview</a>
+      <a data-nav="economy" href="economy.html">Economy</a>
+      <a data-nav="people" href="people.html">People</a>
+      <a data-nav="provinces" href="provinces.html">Provinces</a>
+      <a data-nav="sources" href="sources.html">Sources &amp; Method</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <h1>Provinces</h1>
-  <p class="lede">Java dominates the map: West, East and Central Java together hold
-  129.0 million people &mdash; about 46% of the national total of 283.5 million.
-  The remaining 20 provinces total about 19.5 million people.</p>
-
-  <section class="card chart-card">
-    <h2>Five most populous provinces, 2024</h2>
-    <canvas id="province-chart" role="img" aria-label="Horizontal bar chart of the five most populous provinces: West Java 49.3 million, East Java 41.8 million, Central Java 37.9 million, North Sumatra 15.6 million, Banten 12.4 million"></canvas>
-    <p class="chart-note">Population in millions. Source: <strong>BPS</strong>, 2024.</p>
+  <section aria-labelledby="page-heading">
+    <h1 id="page-heading">Provinces</h1>
+    <p class="section-note">Indonesia has 38 provinces. These are the 18 most populous, home to most of the country's 283.5 million people (World Bank, 2024). Population figures: BPS, 2024.</p>
   </section>
 
-  <section>
-    <h2>All 18 most populous provinces</h2>
-    <div class="table-tools">
-      <label for="prov-search">Search provinces</label>
-      <input type="search" id="prov-search" class="table-search" data-table="provinces-table" data-count-for="prov-count" placeholder="Type a province, capital or region…">
-      <label for="region-filter">Region</label>
-      <select id="region-filter" class="region-filter" data-table="provinces-table">
-        <option value="">All regions</option>
-        <option value="Java">Java</option>
-        <option value="Sumatra">Sumatra</option>
-        <option value="Kalimantan">Kalimantan</option>
-        <option value="Sulawesi">Sulawesi</option>
-        <option value="Bali">Bali</option>
-      </select>
-      <span class="row-count" id="prov-count"></span>
+  <section aria-labelledby="top5-heading">
+    <div class="card chart-card">
+      <h2 id="top5-heading">The 5 most populous provinces</h2>
+      <p class="chart-source">Source: BPS, 2024. West Java alone holds 49.3 million people — more than 17% of the country.</p>
+      <canvas id="top-provinces-chart" class="chart tall" role="img" aria-label="Horizontal bar chart of the five most populous provinces: West Java 49.3 million, East Java 41.8, Central Java 37.9, North Sumatra 15.6, Banten 12.4"></canvas>
     </div>
-    <p>Click any column heading to sort by that column.</p>
-    <div class="table-wrap">
-      <table class="data sortable" id="provinces-table">
+  </section>
+
+  <section aria-labelledby="table-heading">
+    <h2 id="table-heading">All 18 most populous provinces</h2>
+    <p class="section-note">Click any column heading to sort. Type in the search box to filter the table live — try a province, a capital, or a region such as “Java” or “Sumatra”.</p>
+    <div class="table-tools">
+      <label for="province-search">Search:</label>
+      <input class="search-box" type="search" id="province-search" data-search-for="provinces-table" placeholder="Province, capital or region…">
+    </div>
+    <div class="table-scroll">
+      <table class="data" data-sortable id="provinces-table">
+        <caption>18 most populous provinces, 2024</caption>
         <thead>
-          <tr><th>#</th><th>Province</th><th>Capital</th><th>Region</th><th class="num">Population (M)</th><th class="num">Share</th></tr>
+          <tr>
+            <th data-type="number"><button type="button" data-label="#">#</button></th>
+            <th data-type="text"><button type="button" data-label="Province">Province</button></th>
+            <th data-type="text"><button type="button" data-label="Capital">Capital</button></th>
+            <th data-type="text"><button type="button" data-label="Region">Region</button></th>
+            <th data-type="number" class="num"><button type="button" data-label="Population (M)">Population (M)</button></th>
+            <th data-type="number" class="num"><button type="button" data-label="Share">Share</button></th>
+          </tr>
         </thead>
-        <tbody id="provinces-body"></tbody>
+        <tbody>
+          <tr><td>1</td><td>West Java</td><td>Bandung</td><td>Java</td><td class="num">49.3</td><td class="num">17.39%</td></tr>
+          <tr><td>2</td><td>East Java</td><td>Surabaya</td><td>Java</td><td class="num">41.8</td><td class="num">14.74%</td></tr>
+          <tr><td>3</td><td>Central Java</td><td>Semarang</td><td>Java</td><td class="num">37.9</td><td class="num">13.37%</td></tr>
+          <tr><td>4</td><td>North Sumatra</td><td>Medan</td><td>Sumatra</td><td class="num">15.6</td><td class="num">5.50%</td></tr>
+          <tr><td>5</td><td>Banten</td><td>Serang</td><td>Java</td><td class="num">12.4</td><td class="num">4.37%</td></tr>
+          <tr><td>6</td><td>Jakarta</td><td>Jakarta</td><td>Java</td><td class="num">10.6</td><td class="num">3.74%</td></tr>
+          <tr><td>7</td><td>South Sulawesi</td><td>Makassar</td><td>Sulawesi</td><td class="num">9.4</td><td class="num">3.32%</td></tr>
+          <tr><td>8</td><td>Lampung</td><td>Bandar Lampung</td><td>Sumatra</td><td class="num">9.2</td><td class="num">3.25%</td></tr>
+          <tr><td>9</td><td>South Sumatra</td><td>Palembang</td><td>Sumatra</td><td class="num">8.8</td><td class="num">3.10%</td></tr>
+          <tr><td>10</td><td>Riau</td><td>Pekanbaru</td><td>Sumatra</td><td class="num">6.9</td><td class="num">2.43%</td></tr>
+          <tr><td>11</td><td>West Sumatra</td><td>Padang</td><td>Sumatra</td><td class="num">5.9</td><td class="num">2.08%</td></tr>
+          <tr><td>12</td><td>West Kalimantan</td><td>Pontianak</td><td>Kalimantan</td><td class="num">5.8</td><td class="num">2.05%</td></tr>
+          <tr><td>13</td><td>Aceh</td><td>Banda Aceh</td><td>Sumatra</td><td class="num">5.5</td><td class="num">1.94%</td></tr>
+          <tr><td>14</td><td>Bali</td><td>Denpasar</td><td>Bali</td><td class="num">4.4</td><td class="num">1.55%</td></tr>
+          <tr><td>15</td><td>South Kalimantan</td><td>Banjarmasin</td><td>Kalimantan</td><td class="num">4.3</td><td class="num">1.52%</td></tr>
+          <tr><td>16</td><td>East Kalimantan</td><td>Samarinda</td><td>Kalimantan</td><td class="num">3.9</td><td class="num">1.38%</td></tr>
+          <tr><td>17</td><td>Yogyakarta</td><td>Yogyakarta</td><td>Java</td><td class="num">3.8</td><td class="num">1.34%</td></tr>
+          <tr><td>18</td><td>North Sulawesi</td><td>Manado</td><td>Sulawesi</td><td class="num">2.7</td><td class="num">0.95%</td></tr>
+        </tbody>
       </table>
     </div>
-    <p class="table-note">18 most populous of 38 provinces; the rest total ~19.5M.
-    Population in millions; share is the province&rsquo;s share of the national total
-    of 283.5 million. Source: <strong>BPS</strong>, 2024.</p>
+    <p class="no-results" id="provinces-table-empty" hidden>No provinces match your search.</p>
+    <p class="table-note">18 most populous of 38 provinces; the rest total ~19.5M. Population: BPS, 2024. Share is computed from the 283.5M national total (World Bank, 2024). Region is the island group each province sits in.</p>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
-    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
-    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+    <p><strong>Nusantara Numbers</strong> — Indonesia in figures, sourced and dated.
+    Figures: World Bank (2024) and BPS — Statistics Indonesia (2020–2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and year.</p>
   </div>
 </footer>
 
-<script src="js/data.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/tables.js"></script>
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

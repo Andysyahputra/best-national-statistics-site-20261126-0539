@@ -1,155 +1,138 @@
-// Nusantara Numbers — page wiring: nav active state, charts, toggles.
-// Charts are drawn from window.NN_DATA (js/data.js) with the hand-drawn
-// canvas helpers in window.NNCharts (js/charts.js).
-(function () {
-  var D = window.NN_DATA;
-  var C = window.NNCharts;
+// Nusantara Numbers — page wiring: nav active state, chart drawing per page,
+// the growth chart's "% / percentage-point change" toggle, and table controls.
+import {
+  GROWTH_HISTORY,
+  INFLATION_HISTORY,
+  POPULATION_HISTORY,
+  PROVINCES,
+  SECTORS,
+  growthPointChange,
+} from "./data.js";
+import { drawBarChart, drawHBarChart, drawLineChart } from "./charts.js";
+import { initTables } from "./tables.js";
 
-  function markNav() {
-    var page = document.body.getAttribute("data-page") || "index";
-    document.querySelectorAll(".site-nav a").forEach(function (a) {
-      if (a.getAttribute("data-page") === page) {
-        a.classList.add("active");
-        a.setAttribute("aria-current", "page");
-      }
-    });
-  }
+const pct = (v) => v.toFixed(2) + "%";
+const pp = (v) => (v > 0 ? "+" : "") + v.toFixed(2) + " pp";
 
-  // GDP growth 2020–2024 as bars; toggle switches between the growth
-  // rate (%) and the change in percentage points vs the previous year.
-  function wireGrowthToggle(canvasId, toggleId) {
-    var canvas = document.getElementById(canvasId);
-    var toggle = document.getElementById(toggleId);
-    if (!canvas || !toggle) return;
-    var years = D.growthHistory.map(function (d) { return d.year; });
-    var pct = D.growthHistory.map(function (d) { return d.growth; });
-    // Percentage-point change vs the previous year; 2020 has no prior
-    // year, so it is shown as 0 with an "n/a" note in the caption.
-    var pp = D.growthHistory.map(function (d, i) {
-      return i === 0 ? null : +(d.growth - D.growthHistory[i - 1].growth).toFixed(2);
-    });
-    var mode = "pct";
-    function draw() {
-      if (mode === "pct") {
-        C.barChart(canvas, years, pct, { unit: "%", decimals: 2 });
-      } else {
-        var vals = pp.map(function (v) { return v === null ? 0 : v; });
-        C.barChart(canvas, years, vals, { unit: " pp", decimals: 2 });
-      }
-      toggle.setAttribute("aria-pressed", mode === "pp" ? "true" : "false");
-      toggle.textContent = mode === "pct"
-        ? "Show change in percentage points"
-        : "Show growth rate (%)";
-    }
-    toggle.addEventListener("click", function () {
-      mode = mode === "pct" ? "pp" : "pct";
-      draw();
-    });
-    draw();
-    window.addEventListener("resize", draw);
-  }
-
-  function drawPageCharts() {
-    var page = document.body.getAttribute("data-page");
-    var years = D.growthHistory.map(function (d) { return d.year; });
-    var growth = D.growthHistory.map(function (d) { return d.growth; });
-    var inflYears = D.inflationHistory.map(function (d) { return d.year; });
-    var infl = D.inflationHistory.map(function (d) { return d.inflation; });
-    var popYears = D.populationHistory.map(function (d) { return d.year; });
-    var pop = D.populationHistory.map(function (d) { return d.population; });
-
-    if (page === "index") {
-      wireGrowthToggle("growth-chart", "growth-toggle");
-    }
-    if (page === "economy") {
-      var gc = document.getElementById("growth-chart");
-      if (gc) C.barChart(gc, years, growth, { unit: "%", decimals: 2 });
-      var ic = document.getElementById("inflation-chart");
-      if (ic) C.lineChart(ic, inflYears, infl, { unit: "%", decimals: 2 });
-      var sc = document.getElementById("sector-chart");
-      if (sc) C.hbarChart(sc,
-        D.sectors.map(function (s) { return s.name; }),
-        D.sectors.map(function (s) { return s.share; }),
-        { unit: "%", decimals: 0 });
-    }
-    if (page === "people") {
-      var pc = document.getElementById("population-chart");
-      if (pc) C.lineChart(pc, popYears, pop, { unit: "M", decimals: 1 });
-    }
-    if (page === "provinces") {
-      var top5 = D.provinces.slice(0, 5);
-      var bc = document.getElementById("province-chart");
-      if (bc) C.hbarChart(bc,
-        top5.map(function (p) { return p.name; }),
-        top5.map(function (p) { return p.population; }),
-        { unit: "M", decimals: 1 });
-    }
-  }
-
-  function fillProvinceTables() {
-    // People page: top-10 provinces table, built from the data file.
-    var top10 = document.getElementById("top10-body");
-    if (top10) {
-      D.provinces.slice(0, 10).forEach(function (p, i) {
-        var tr = document.createElement("tr");
-        tr.innerHTML =
-          "<td data-sort=\"" + (i + 1) + "\">" + (i + 1) + "</td>" +
-          "<td>" + p.name + "</td>" +
-          "<td>" + p.capital + "</td>" +
-          "<td>" + p.region + "</td>" +
-          "<td data-sort=\"" + p.population + "\">" + p.population.toFixed(1) + "</td>" +
-          "<td data-sort=\"" + (p.population / D.meta.nationalTotal * 100).toFixed(2) + "\">" +
-          (p.population / D.meta.nationalTotal * 100).toFixed(1) + "%</td>";
-        top10.appendChild(tr);
-      });
-    }
-    // Provinces page: full 18-province table, built from the data file.
-    var full = document.getElementById("provinces-body");
-    if (full) {
-      D.provinces.forEach(function (p, i) {
-        var tr = document.createElement("tr");
-        tr.innerHTML =
-          "<td data-sort=\"" + (i + 1) + "\">" + (i + 1) + "</td>" +
-          "<td>" + p.name + "</td>" +
-          "<td>" + p.capital + "</td>" +
-          "<td>" + p.region + "</td>" +
-          "<td data-sort=\"" + p.population + "\">" + p.population.toFixed(1) + "</td>" +
-          "<td data-sort=\"" + (p.population / D.meta.nationalTotal * 100).toFixed(2) + "\">" +
-          (p.population / D.meta.nationalTotal * 100).toFixed(1) + "%</td>";
-        full.appendChild(tr);
-      });
-    }
-  }
-
-  function fillSourcesList() {
-    var list = document.getElementById("sources-list");
-    if (!list) return;
-    D.sources.forEach(function (s) {
-      var li = document.createElement("li");
-      li.className = "source-item";
-      var h = document.createElement("h3");
-      h.textContent = s.figure;
-      var meta = document.createElement("p");
-      meta.className = "source-meta";
-      meta.textContent = s.source + " · " + s.year;
-      var note = document.createElement("p");
-      note.textContent = s.note;
-      li.appendChild(h); li.appendChild(meta); li.appendChild(note);
-      list.appendChild(li);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    markNav();
-    fillProvinceTables();
-    fillSourcesList();
-    window.NNTables.init();
-    drawPageCharts();
-    // Redraw charts when the viewport changes (phone rotation, resize).
-    var t;
-    window.addEventListener("resize", function () {
-      clearTimeout(t);
-      t = setTimeout(drawPageCharts, 150);
-    });
+// Mark the current page's link in the top nav.
+function markActiveNav() {
+  const page = document.body.dataset.page || "index";
+  document.querySelectorAll(".main-nav a").forEach((link) => {
+    if (link.dataset.nav === page) link.classList.add("active");
   });
-})();
+}
+
+// GDP growth bar chart, with a toggle between growth % and the
+// percentage-point change on the previous year.
+function wireGrowthChart(canvasId, toggleId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const toggle = document.getElementById(toggleId);
+  let mode = "pct";
+
+  function draw() {
+    if (mode === "pct") {
+      drawBarChart(canvas, {
+        labels: GROWTH_HISTORY.map((d) => d.year),
+        values: GROWTH_HISTORY.map((d) => d.growth),
+        format: pct,
+        colorFor: (v) => (v < 0 ? "#e85d4a" : "#006d6f"),
+      });
+    } else {
+      // 2020 has no previous year, so it is shown as a flat grey "n/a" bar.
+      const changes = GROWTH_HISTORY.map((d, i) => growthPointChange(i));
+      drawBarChart(canvas, {
+        labels: GROWTH_HISTORY.map((d) => d.year),
+        values: changes.map((c) => (c === null ? 0 : c)),
+        format: (v, i) => (changes[i] === null ? "n/a" : pp(v)),
+        colorFor: (v, i) => (changes[i] === null ? "#b9b3a4" : v < 0 ? "#e85d4a" : "#4ec9b0"),
+      });
+    }
+  }
+
+  if (toggle) {
+    toggle.querySelectorAll("button").forEach((button) => {
+      button.addEventListener("click", () => {
+        mode = button.dataset.mode;
+        toggle.querySelectorAll("button").forEach((b) => {
+          b.setAttribute("aria-pressed", String(b === button));
+        });
+        draw();
+      });
+    });
+  }
+  draw();
+}
+
+function wirePageCharts() {
+  const page = document.body.dataset.page || "index";
+
+  if (page === "index") {
+    wireGrowthChart("growth-chart", "growth-toggle");
+  }
+
+  if (page === "economy") {
+    const growth = document.getElementById("growth-chart");
+    if (growth) {
+      drawBarChart(growth, {
+        labels: GROWTH_HISTORY.map((d) => d.year),
+        values: GROWTH_HISTORY.map((d) => d.growth),
+        format: pct,
+        colorFor: (v) => (v < 0 ? "#e85d4a" : "#006d6f"),
+      });
+    }
+    const inflation = document.getElementById("inflation-chart");
+    if (inflation) {
+      drawLineChart(inflation, {
+        labels: INFLATION_HISTORY.map((d) => d.year),
+        values: INFLATION_HISTORY.map((d) => d.inflation),
+        format: pct,
+      });
+    }
+    const sectors = document.getElementById("sector-chart");
+    if (sectors) {
+      drawHBarChart(sectors, {
+        labels: SECTORS.map((s) => s.sector),
+        values: SECTORS.map((s) => s.share),
+        format: (v) => "~" + v + "%",
+        maxValue: 40,
+      });
+    }
+  }
+
+  if (page === "people") {
+    const population = document.getElementById("population-chart");
+    if (population) {
+      drawLineChart(population, {
+        labels: POPULATION_HISTORY.map((d) => d.year),
+        values: POPULATION_HISTORY.map((d) => d.population),
+        format: (v) => v.toFixed(1) + "M",
+      });
+    }
+  }
+
+  if (page === "provinces") {
+    const top = document.getElementById("top-provinces-chart");
+    if (top) {
+      const five = PROVINCES.slice(0, 5);
+      drawHBarChart(top, {
+        labels: five.map((p) => p.province),
+        values: five.map((p) => p.population),
+        format: (v) => v.toFixed(1) + "M",
+        maxValue: 50,
+      });
+    }
+  }
+}
+
+// Redraw canvas charts when the window is resized (canvas backing size
+// follows its CSS box, so a redraw keeps lines crisp).
+let resizeTimer = null;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(wirePageCharts, 150);
+});
+
+markActiveNav();
+wirePageCharts();
+initTables();

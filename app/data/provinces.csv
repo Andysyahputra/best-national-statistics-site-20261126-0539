@@ -1,19 +1,19 @@
-province,capital,region,population_millions,source,year
-West Java,Bandung,Java,49.3,BPS,2024
-East Java,Surabaya,Java,41.8,BPS,2024
-Central Java,Semarang,Java,37.9,BPS,2024
-North Sumatra,Medan,Sumatra,15.6,BPS,2024
-Banten,Serang,Java,12.4,BPS,2024
-Jakarta,Jakarta,Java,10.6,BPS,2024
-South Sulawesi,Makassar,Sulawesi,9.4,BPS,2024
-Lampung,Bandar Lampung,Sumatra,9.2,BPS,2024
-South Sumatra,Palembang,Sumatra,8.8,BPS,2024
-Riau,Pekanbaru,Sumatra,6.9,BPS,2024
-West Sumatra,Padang,Sumatra,5.9,BPS,2024
-West Kalimantan,Pontianak,Kalimantan,5.8,BPS,2024
-Aceh,Banda Aceh,Sumatra,5.5,BPS,2024
-Bali,Denpasar,Bali,4.4,BPS,2024
-South Kalimantan,Banjarmasin,Kalimantan,4.3,BPS,2024
-East Kalimantan,Samarinda,Kalimantan,3.9,BPS,2024
-Yogyakarta,Yogyakarta,Java,3.8,BPS,2024
-North Sulawesi,Manado,Sulawesi,2.7,BPS,2024
+province,capital,region,population_million,share_of_national_percent,source,year
+West Java,Bandung,Java,49.3,17.39,BPS,2024
+East Java,Surabaya,Java,41.8,14.74,BPS,2024
+Central Java,Semarang,Java,37.9,13.37,BPS,2024
+North Sumatra,Medan,Sumatra,15.6,5.50,BPS,2024
+Banten,Serang,Java,12.4,4.37,BPS,2024
+Jakarta,Jakarta,Java,10.6,3.74,BPS,2024
+South Sulawesi,Makassar,Sulawesi,9.4,3.32,BPS,2024
+Lampung,Bandar Lampung,Sumatra,9.2,3.25,BPS,2024
+South Sumatra,Palembang,Sumatra,8.8,3.10,BPS,2024
+Riau,Pekanbaru,Sumatra,6.9,2.43,BPS,2024
+West Sumatra,Padang,Sumatra,5.9,2.08,BPS,2024
+West Kalimantan,Pontianak,Kalimantan,5.8,2.05,BPS,2024
+Aceh,Banda Aceh,Sumatra,5.5,1.94,BPS,2024
+Bali,Denpasar,Bali,4.4,1.55,BPS,2024
+South Kalimantan,Banjarmasin,Kalimantan,4.3,1.52,BPS,2024
+East Kalimantan,Samarinda,Kalimantan,3.9,1.38,BPS,2024
+Yogyakarta,Yogyakarta,Java,3.8,1.34,BPS,2024
+North Sulawesi,Manado,Sulawesi,2.7,0.95,BPS,2024
