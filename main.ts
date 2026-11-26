@@ -14,7 +14,7 @@
 // random values, or on the order the filesystem happens to list entries, so
 // two runs produce byte-identical files.
 
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildDossier } from "./vendor/makefun-frontend.ts";
@@ -24,9 +24,6 @@ const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 const appDir = join(repoRoot, "app");
 const shotsDir = join(repoRoot, "screenshots");
 
-// Start from a clean output directory so stale files from an earlier run can
-// never leak into the hand-in.
-rmSync(outputDir, { recursive: true, force: true });
 mkdirSync(outputDir, { recursive: true });
 
 cpSync(appDir, join(outputDir, "app"), { recursive: true });
