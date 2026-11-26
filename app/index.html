@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nusantara Numbers — Indonesia in figures</title>
+<meta name="description" content="Indonesia in figures, sourced and dated: population, GDP, growth, inflation, unemployment and the provinces.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+</head>
+<body data-page="index">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" data-page="index">Overview</a>
+      <a href="economy.html" data-page="economy">Economy</a>
+      <a href="people.html" data-page="people">People</a>
+      <a href="provinces.html" data-page="provinces">Provinces</a>
+      <a href="sources.html" data-page="sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Indonesia in figures</h1>
+      <p class="tagline">Indonesia in figures, sourced and dated.</p>
+      <p class="lede">The headline numbers for Indonesia &mdash; population, economy, prices and jobs &mdash; each with its
+      source and year, so you can check where every figure comes from.</p>
+      <span class="asof">Data as of November 2026</span>
+    </div>
+    <img class="flag" src="img/flag.svg" alt="Flag of Indonesia: red over white" width="180" height="120">
+  </section>
+
+  <h2>The headline numbers</h2>
+  <section class="kpi-grid" aria-label="Key indicators">
+    <article class="kpi-card">
+      <div class="kpi-value">283.5M</div>
+      <div class="kpi-label">Population</div>
+      <p class="kpi-note">283.5 million people</p>
+      <p class="source-line">Source: <strong>World Bank</strong>, 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">$1.40T</div>
+      <div class="kpi-label">GDP</div>
+      <p class="kpi-note">$1.40 trillion</p>
+      <p class="source-line">Source: <strong>World Bank</strong>, 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">$4,925</div>
+      <div class="kpi-label">GDP per capita</div>
+      <p class="kpi-note">$4,925 per person</p>
+      <p class="source-line">Source: <strong>World Bank</strong>, 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">5.03%</div>
+      <div class="kpi-label">GDP growth</div>
+      <p class="kpi-note">Real GDP growth, year on year</p>
+      <p class="source-line">Source: <strong>BPS</strong>, 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">1.57%</div>
+      <div class="kpi-label">Inflation</div>
+      <p class="kpi-note">CPI, year on year, December</p>
+      <p class="source-line">Source: <strong>BPS</strong>, Dec 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">4.76%</div>
+      <div class="kpi-label">Unemployment</div>
+      <p class="kpi-note">Open unemployment rate</p>
+      <p class="source-line">Source: <strong>BPS</strong>, Feb 2025</p>
+    </article>
+  </section>
+
+  <section class="card chart-card">
+    <div class="chart-head">
+      <h2>GDP growth, 2020&ndash;2024</h2>
+      <button class="btn" id="growth-toggle" type="button" aria-pressed="false">Show change in percentage points</button>
+    </div>
+    <canvas id="growth-chart" role="img" aria-label="Bar chart of Indonesia's GDP growth: 2020 minus 2.07 percent, 2021 3.70 percent, 2022 5.31 percent, 2023 5.05 percent, 2024 5.03 percent"></canvas>
+    <p class="chart-note">Real GDP growth, year on year. Source: <strong>BPS</strong>, 2020&ndash;2024.
+    The 2020 bar is negative: the economy shrank 2.07% in the pandemic year.
+    Switch the toggle to see the change in percentage points against the previous year
+    (2020 has no previous year, so it shows as zero there).</p>
+  </section>
+
+  <section>
+    <h2>About this site</h2>
+    <p>Nusantara Numbers gathers Indonesia&rsquo;s headline statistics in one
+    place, in plain language, with every figure labelled with its source and
+    year. The <a href="economy.html">Economy</a> page covers output, prices
+    and the sectors behind GDP. The <a href="people.html">People</a> page
+    covers population, jobs, poverty and how long Indonesians live. The
+    <a href="provinces.html">Provinces</a> page ranks the 18 most populous
+    provinces. The <a href="sources.html">Sources</a> page lists every figure
+    used here, with its source, year and a short note &mdash; and the raw data
+    files behind the site, free to download.</p>
+    <p class="chart-note">All figures are as published by the World Bank and
+    by BPS (Statistics Indonesia). Nothing here is estimated by this site.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
+    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/tables.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

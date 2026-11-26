@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Provinces — Nusantara Numbers</title>
+<meta name="description" content="Indonesia's 18 most populous provinces in figures: population, capital, region and share of the national total, sortable and searchable.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+</head>
+<body data-page="provinces">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" data-page="index">Overview</a>
+      <a href="economy.html" data-page="economy">Economy</a>
+      <a href="people.html" data-page="people">People</a>
+      <a href="provinces.html" data-page="provinces">Provinces</a>
+      <a href="sources.html" data-page="sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Provinces</h1>
+  <p class="lede">Java dominates the map: West, East and Central Java together hold
+  129.0 million people &mdash; about 46% of the national total of 283.5 million.
+  The remaining 20 provinces total about 19.5 million people.</p>
+
+  <section class="card chart-card">
+    <h2>Five most populous provinces, 2024</h2>
+    <canvas id="province-chart" role="img" aria-label="Horizontal bar chart of the five most populous provinces: West Java 49.3 million, East Java 41.8 million, Central Java 37.9 million, North Sumatra 15.6 million, Banten 12.4 million"></canvas>
+    <p class="chart-note">Population in millions. Source: <strong>BPS</strong>, 2024.</p>
+  </section>
+
+  <section>
+    <h2>All 18 most populous provinces</h2>
+    <div class="table-tools">
+      <label for="prov-search">Search provinces</label>
+      <input type="search" id="prov-search" class="table-search" data-table="provinces-table" data-count-for="prov-count" placeholder="Type a province, capital or region…">
+      <label for="region-filter">Region</label>
+      <select id="region-filter" class="region-filter" data-table="provinces-table">
+        <option value="">All regions</option>
+        <option value="Java">Java</option>
+        <option value="Sumatra">Sumatra</option>
+        <option value="Kalimantan">Kalimantan</option>
+        <option value="Sulawesi">Sulawesi</option>
+        <option value="Bali">Bali</option>
+      </select>
+      <span class="row-count" id="prov-count"></span>
+    </div>
+    <p>Click any column heading to sort by that column.</p>
+    <div class="table-wrap">
+      <table class="data sortable" id="provinces-table">
+        <thead>
+          <tr><th>#</th><th>Province</th><th>Capital</th><th>Region</th><th class="num">Population (M)</th><th class="num">Share</th></tr>
+        </thead>
+        <tbody id="provinces-body"></tbody>
+      </table>
+    </div>
+    <p class="table-note">18 most populous of 38 provinces; the rest total ~19.5M.
+    Population in millions; share is the province&rsquo;s share of the national total
+    of 283.5 million. Source: <strong>BPS</strong>, 2024.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
+    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/tables.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

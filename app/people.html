@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>People — Nusantara Numbers</title>
+<meta name="description" content="Indonesia's people in figures: population growth 2010–2024, unemployment, poverty and life expectancy, each sourced and dated.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+</head>
+<body data-page="people">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" data-page="index">Overview</a>
+      <a href="economy.html" data-page="economy">Economy</a>
+      <a href="people.html" data-page="people">People</a>
+      <a href="provinces.html" data-page="provinces">Provinces</a>
+      <a href="sources.html" data-page="sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>People</h1>
+  <p class="lede">Indonesia is home to 283.5 million people. The population grew by
+  39 million between 2010 and 2024, from 244.5 million to 283.5 million.</p>
+
+  <section class="kpi-grid" aria-label="Key population indicators">
+    <article class="kpi-card">
+      <div class="kpi-value">283.5M</div>
+      <div class="kpi-label">Population</div>
+      <p class="kpi-note">283.5 million people</p>
+      <p class="source-line">Source: <strong>World Bank</strong>, 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">4.76%</div>
+      <div class="kpi-label">Unemployment</div>
+      <p class="kpi-note">Open unemployment rate</p>
+      <p class="source-line">Source: <strong>BPS</strong>, Feb 2025</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">8.47%</div>
+      <div class="kpi-label">Poverty rate</div>
+      <p class="kpi-note">Share below the poverty line</p>
+      <p class="source-line">Source: <strong>BPS</strong>, Mar 2025</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">74.2</div>
+      <div class="kpi-label">Life expectancy</div>
+      <p class="kpi-note">74.2 years at birth</p>
+      <p class="source-line">Source: <strong>BPS</strong>, 2024</p>
+    </article>
+  </section>
+
+  <section class="card chart-card">
+    <h2>Population, 2010&ndash;2024</h2>
+    <canvas id="population-chart" role="img" aria-label="Line chart of Indonesia's population: 2010 244.5 million, 2015 264.0 million, 2020 274.0 million, 2024 283.5 million"></canvas>
+    <p class="chart-note">Total population, millions. Source: <strong>World Bank</strong>,
+    2010&ndash;2024. The population grew by 39 million over these fourteen years.</p>
+  </section>
+
+  <section>
+    <h2>Ten most populous provinces</h2>
+    <div class="table-tools">
+      <label for="top10-search">Search provinces</label>
+      <input type="search" id="top10-search" class="table-search" data-table="top10-table" data-count-for="top10-count" placeholder="Type a province, capital or region…">
+      <span class="row-count" id="top10-count"></span>
+    </div>
+    <p>Click a column heading to sort the table.</p>
+    <div class="table-wrap">
+      <table class="data sortable" id="top10-table">
+        <thead>
+          <tr><th>#</th><th>Province</th><th>Capital</th><th>Region</th><th class="num">Population (M)</th><th class="num">Share</th></tr>
+        </thead>
+        <tbody id="top10-body"></tbody>
+      </table>
+    </div>
+    <p class="table-note">Population in millions. Share is the province&rsquo;s share of the
+    national total of 283.5 million. Source: <strong>BPS</strong>, 2024.
+    See the full ranking on the <a href="provinces.html">Provinces</a> page.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
+    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/tables.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

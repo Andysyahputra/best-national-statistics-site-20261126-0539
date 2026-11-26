@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Economy — Nusantara Numbers</title>
+<meta name="description" content="Indonesia's economy in figures: GDP, GDP per capita, growth 2020–2024, inflation and GDP by sector, each sourced and dated.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+</head>
+<body data-page="economy">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" data-page="index">Overview</a>
+      <a href="economy.html" data-page="economy">Economy</a>
+      <a href="people.html" data-page="people">People</a>
+      <a href="provinces.html" data-page="provinces">Provinces</a>
+      <a href="sources.html" data-page="sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Economy</h1>
+  <p class="lede">Indonesia&rsquo;s economy grew 5.03% in 2024 and has run at about 5%
+  a year since the pandemic rebound, while inflation fell back to 1.57% by
+  December 2024.</p>
+
+  <section class="kpi-grid" aria-label="Key economic indicators">
+    <article class="kpi-card">
+      <div class="kpi-value">$1.40T</div>
+      <div class="kpi-label">GDP</div>
+      <p class="kpi-note">$1.40 trillion, current US dollars</p>
+      <p class="source-line">Source: <strong>World Bank</strong>, 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">$4,925</div>
+      <div class="kpi-label">GDP per capita</div>
+      <p class="kpi-note">$4,925 per person</p>
+      <p class="source-line">Source: <strong>World Bank</strong>, 2024</p>
+    </article>
+    <article class="kpi-card">
+      <div class="kpi-value">5.03%</div>
+      <div class="kpi-label">GDP growth</div>
+      <p class="kpi-note">Real GDP growth, year on year</p>
+      <p class="source-line">Source: <strong>BPS</strong>, 2024</p>
+    </article>
+  </section>
+
+  <section class="card chart-card">
+    <h2>GDP growth, 2020&ndash;2024</h2>
+    <canvas id="growth-chart" role="img" aria-label="Bar chart of Indonesia's GDP growth: 2020 minus 2.07 percent, 2021 3.70 percent, 2022 5.31 percent, 2023 5.05 percent, 2024 5.03 percent"></canvas>
+    <p class="chart-note">Real GDP growth, year on year. Source: <strong>BPS</strong>, 2020&ndash;2024.
+    After the 2020 contraction of 2.07%, growth bounced back to 5.31% in 2022 and has
+    held near 5% since.</p>
+  </section>
+
+  <section class="card chart-card">
+    <h2>Inflation, December year on year, 2020&ndash;2024</h2>
+    <canvas id="inflation-chart" role="img" aria-label="Line chart of Indonesia's December inflation: 2020 1.68 percent, 2021 1.87 percent, 2022 5.51 percent, 2023 2.61 percent, 2024 1.57 percent"></canvas>
+    <p class="chart-note">Consumer Price Index, year on year, December.
+    Source: <strong>BPS</strong>, 2020&ndash;2024. Inflation spiked to 5.51% in
+    December 2022, then eased to 1.57% by December 2024.</p>
+  </section>
+
+  <section class="card chart-card">
+    <h2>GDP by sector, 2024 (approx.)</h2>
+    <canvas id="sector-chart" role="img" aria-label="Horizontal bar chart of approximate GDP shares: Manufacturing 19 percent, Wholesale and retail trade 13 percent, Agriculture 12 percent, Construction 10 percent, Mining 8 percent, Other 38 percent"></canvas>
+    <p class="chart-note">Approximate shares of GDP. Source: <strong>BPS</strong>, 2024.
+    Manufacturing is the largest single sector at about 19% of GDP.</p>
+  </section>
+
+  <section>
+    <h2>Growth and inflation, 2020&ndash;2024</h2>
+    <p>Click a column heading to sort the table.</p>
+    <div class="table-wrap">
+      <table class="data sortable">
+        <thead>
+          <tr><th>Year</th><th class="num">GDP growth</th><th class="num">Inflation (Dec YoY)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-sort="2020">2020</td><td class="num" data-sort="-2.07">−2.07%</td><td class="num" data-sort="1.68">1.68%</td></tr>
+          <tr><td data-sort="2021">2021</td><td class="num" data-sort="3.70">3.70%</td><td class="num" data-sort="1.87">1.87%</td></tr>
+          <tr><td data-sort="2022">2022</td><td class="num" data-sort="5.31">5.31%</td><td class="num" data-sort="5.51">5.51%</td></tr>
+          <tr><td data-sort="2023">2023</td><td class="num" data-sort="5.05">5.05%</td><td class="num" data-sort="2.61">2.61%</td></tr>
+          <tr><td data-sort="2024">2024</td><td class="num" data-sort="5.03">5.03%</td><td class="num" data-sort="1.57">1.57%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">GDP growth: real GDP, year on year. Inflation: CPI, year on year, December.
+    Source: <strong>BPS</strong>, 2020&ndash;2024.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
+    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/tables.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Nusantara Numbers garuda-wing monogram">
+  <!-- Hand-drawn garuda-wing monogram: three sweeping wing feathers
+       rising from a shared base, in deep teal on a sand disc. -->
+  <circle cx="32" cy="32" r="30" fill="#F5E6D3" stroke="#006D6F" stroke-width="2.5"/>
+  <g fill="none" stroke="#006D6F" stroke-width="4" stroke-linecap="round">
+    <path d="M18 44 C 20 30, 26 20, 36 14"/>
+    <path d="M26 46 C 28 34, 34 26, 44 20"/>
+    <path d="M34 47 C 36 38, 42 32, 50 28"/>
+  </g>
+  <g fill="#4EC9B0">
+    <circle cx="36" cy="14" r="2.6"/>
+    <circle cx="44" cy="20" r="2.6"/>
+    <circle cx="50" cy="28" r="2.6"/>
+  </g>
+  <path d="M14 48 Q 32 54 50 48" fill="none" stroke="#E85D4A" stroke-width="3" stroke-linecap="round"/>
+</svg>

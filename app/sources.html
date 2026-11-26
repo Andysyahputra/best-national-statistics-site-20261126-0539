@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources &amp; Method — Nusantara Numbers</title>
+<meta name="description" content="Every figure on Nusantara Numbers with its source, year and a short note, plus the site's own data files to download.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+</head>
+<body data-page="sources">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="img/logo.svg" alt="" width="34" height="34"> Nusantara Numbers</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" data-page="index">Overview</a>
+      <a href="economy.html" data-page="economy">Economy</a>
+      <a href="people.html" data-page="people">People</a>
+      <a href="provinces.html" data-page="provinces">Provinces</a>
+      <a href="sources.html" data-page="sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Sources &amp; Method</h1>
+  <p class="lede">Every figure on this site comes from one of two publishers:
+  the <strong>World Bank</strong> (World Development Indicators) for population
+  and GDP, and <strong>BPS &mdash; Statistics Indonesia</strong> for growth,
+  inflation, jobs, poverty, life expectancy, sectors and provinces. Each entry
+  below names the figure, its source, its year and a short note. Province shares
+  are the site&rsquo;s own arithmetic: province population divided by the national
+  total of 283.5 million. Sector shares are labelled &ldquo;approx.&rdquo; because
+  BPS publishes them rounded.</p>
+
+  <h2>Download the data</h2>
+  <p>The same figures the site shows, as files you can keep:</p>
+  <div class="downloads">
+    <a href="data/all.json" download>Download all figures (JSON)</a>
+    <a href="data/provinces.csv" download>Download provinces (CSV)</a>
+  </div>
+
+  <h2>Every figure, with its source</h2>
+  <ul class="sources-list" id="sources-list"></ul>
+
+  <h2>Method notes</h2>
+  <ul>
+    <li>Population, GDP and GDP per capita are World Bank figures for 2024.</li>
+    <li>GDP growth is real (inflation-adjusted) growth, year on year, from BPS.</li>
+    <li>Inflation is the Consumer Price Index, year on year, measured each December, from BPS.</li>
+    <li>Unemployment is the open unemployment rate for February 2025, from BPS.</li>
+    <li>Poverty is the share of the population below the poverty line, March 2025, from BPS.</li>
+    <li>The province table lists the 18 most populous of Indonesia&rsquo;s 38 provinces; the remaining 20 provinces total about 19.5 million people.</li>
+    <li>Nothing on this site is estimated by the site itself, except the province shares, which are simple divisions of the published figures.</li>
+  </ul>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Nusantara Numbers</strong> &mdash; Indonesia in figures, sourced and dated.</p>
+    <p>Figures: World Bank (2024) and BPS &mdash; Statistics Indonesia (2020&ndash;2025).
+    See <a href="sources.html">Sources &amp; Method</a> for every figure, its source and its year.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/tables.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
